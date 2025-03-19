@@ -25,18 +25,18 @@ This project is a Streamlit-based conversational chatbot that uses OpenAI's API 
 
 2. **Create a virtual environment (optional but recommended)**:
 
-```BASH
-
-python -m venv venv
-source venv/bin/activate  # On Windows use `venv\Scripts\activate`
-```
+   ```BASH
+   
+   python -m venv venv
+   source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+   ```
 
 3. **Install the required packages**:
 
-```BASH
-
-pip install -r requirements.txt
-```
+   ```BASH
+   
+   pip install -r requirements.txt
+   ```
 
 ## Configuration
 1. **Set up your OpenAI API key**:
@@ -45,10 +45,10 @@ you can enter the API key directly in the Streamlit app when prompted.
 ## Running the Chatbot
 1. **Start the Streamlit app**:
 
-```BASH
-
-streamlit run app.py
-```
+   ```BASH
+   
+   streamlit run app.py
+   ```
 
 2. **Interact with the chatbot**:
 
