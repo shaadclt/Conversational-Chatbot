@@ -20,8 +20,8 @@ This project is a Streamlit-based conversational chatbot that uses OpenAI's API 
 1. **Clone the repository**:
 
    ```bash
-   git clone https://github.com/yourusername/conversational-chatbot.git
-   cd conversational-chatbot
+   git clone https://github.com/shaadclt/Conversational-Chatbot.git
+   cd Conversational-Chatbot
 
 2. **Create a virtual environment (optional but recommended)**:
 
