@@ -1,58 +1,13 @@
 import streamlit as st
 import os
-import base64
-from openai import OpenAI, OpenAIError
 from utils import get_answer, text_to_speech, autoplay_audio, speech_to_text
 from audio_recorder_streamlit import audio_recorder
 from streamlit_float import *
 
+# Initialize floating components
 float_init()
 
-# Function to validate OpenAI API Key
-def validate_api_key(api_key):
-    try:
-        test_client = OpenAI(api_key=api_key)
-        test_client.models.list()  # Test API access
-        return True
-    except OpenAIError:
-        return False
-
-# Sidebar for API Key input (only if not already stored)
-if "openai_api_key" not in st.session_state:
-    with st.sidebar:
-        st.title("Configuration")
-        openai_api_key = st.text_input("Enter your OpenAI API Key", type="password")
-
-        if openai_api_key:
-            if validate_api_key(openai_api_key):
-                st.session_state["openai_api_key"] = openai_api_key
-                st.session_state["sidebar_hidden"] = True  # Mark sidebar as hidden
-                st.success("API Key is valid! Reloading...")
-                st.rerun()
-            else:
-                st.error("Invalid OpenAI API Key. Please enter a valid key.")
-                st.stop()
-
-# Stop execution if API key is missing
-if "openai_api_key" not in st.session_state:
-    st.warning("Please enter a valid OpenAI API Key in the sidebar to continue.")
-    st.stop()
-
-# Hide Sidebar after valid key entry
-if "sidebar_hidden" in st.session_state and st.session_state["sidebar_hidden"]:
-    st.markdown(
-        """
-        <style>
-        section[data-testid="stSidebar"] {display: none !important;}
-        </style>
-        """,
-        unsafe_allow_html=True
-    )
-
-# Initialize OpenAI client with validated key
-client = OpenAI(api_key=st.session_state["openai_api_key"])
-
-# Chat Interface
+# Function to initialize chatbot session
 def initialize_session_state():
     if "messages" not in st.session_state:
         st.session_state.messages = [
@@ -61,6 +16,7 @@ def initialize_session_state():
 
 initialize_session_state()
 
+# Chat Interface
 st.title("S Voice Chat")
 
 footer_container = st.container()
@@ -96,8 +52,6 @@ if st.session_state.messages[-1]["role"] != "assistant":
         os.remove(audio_file)
 
 footer_container.float("bottom: 1rem;")
-
-
 
 def set_bg_from_url(url, opacity=1):
 

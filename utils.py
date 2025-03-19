@@ -1,23 +1,13 @@
 from openai import OpenAI
 import base64
 import streamlit as st
+import os
+from dotenv import load_dotenv
 
+load_dotenv()
+api_key = os.getenv("openai_api_key")
 
-# Sidebar input for OpenAI API Key
-st.sidebar.title("Configuration")
-openai_api_key = st.sidebar.text_input("Enter your OpenAI API Key", type="password")
-
-# Store API key in session state
-if openai_api_key:
-    st.session_state["openai_api_key"] = openai_api_key
-
-# Check if API key exists
-if "openai_api_key" not in st.session_state:
-    st.warning("Please enter your OpenAI API Key in the sidebar to continue.")
-    st.stop()
-
-# Initialize OpenAI client
-client = OpenAI(api_key=st.session_state["openai_api_key"])
+client = OpenAI(api_key=api_key)
 
 # Predefined responses to personal questions
 personal_responses = {
